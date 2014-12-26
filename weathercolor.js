@@ -1,6 +1,5 @@
 var util = require('util');
 
-}
 var ranges = [{ 
 	temp : 90, 
 	rgb : [207, 57, 39],
