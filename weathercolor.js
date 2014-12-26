@@ -1,7 +1,6 @@
 var Blink1 = require('node-blink1'),
 	blink1,
-	util = require('util'),
-	color = require('onecolor')
+	util = require('util');
 
 try {
 	blink1 = new Blink1();
@@ -57,7 +56,9 @@ module.exports = function(temp) {
 		rgb = [];
 		for (var i = 0; i < 3; i++) {
 			rgb[i] = ((upper.rgb[i] - lower.rgb[i]) * pct) + lower.rgb[i];
+			rgb[i] = rgb[i].toFixed(2);
 		};
 	}
-	if (blink1) blink1.fadeToRGB(100, rgb[0], rgb[1], rgb[2])
+	// if (blink1) blink1.fadeToRGB(100, rgb[0], rgb[1], rgb[2])
+	return rgb;
 }
