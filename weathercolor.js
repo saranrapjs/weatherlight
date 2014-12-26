@@ -1,10 +1,4 @@
-var Blink1 = require('node-blink1'),
-	blink1,
-	util = require('util');
-
-try {
-	blink1 = new Blink1();
-} catch(e) {
+var util = require('util');
 
 }
 var ranges = [{ 
@@ -59,6 +53,5 @@ module.exports = function(temp) {
 			rgb[i] = rgb[i].toFixed(2);
 		};
 	}
-	// if (blink1) blink1.fadeToRGB(100, rgb[0], rgb[1], rgb[2])
 	return rgb;
 }
