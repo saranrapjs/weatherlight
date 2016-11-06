@@ -8,6 +8,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strconv"
 
 	"github.com/aybabtme/rgbterm"
 	"github.com/hink/go-blink1"
@@ -121,12 +122,15 @@ func main() {
 	if err != nil {
 		log.Fatal("bad device :(", err)
 	}
-	device.SetState(blink1.State{
+	if err := device.SetState(blink1.State{
 		Red:   c.R,
 		Green: c.G,
 		Blue:  c.B,
-	})
-	fmt.Println("Color: ", rgbterm.BgString("     ", c.R, c.G, c.B))
+	}); err != nil {
+		log.Fatal("bad light setting :( ", err)
+	}
+
+	fmt.Println("Color: ", rgbterm.BgString(strconv.Itoa(int(c.R))+","+strconv.Itoa(int(c.G))+","+strconv.Itoa(int(c.B)), c.R, c.G, c.B))
 }
 
 func tempToRGBA(temp float64) color.RGBA {
