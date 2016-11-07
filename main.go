@@ -37,7 +37,7 @@ var colorRanges = []colorRange{
 		RGB: color.RGBA{
 			R: 238,
 			G: 126,
-			B: 39,
+			B: 38,
 		},
 	},
 	colorRange{
@@ -130,11 +130,12 @@ func main() {
 		log.Fatal("bad light setting :( ", err)
 	}
 
-	fmt.Println("Color: ", rgbterm.BgString(strconv.Itoa(int(c.R))+","+strconv.Itoa(int(c.G))+","+strconv.Itoa(int(c.B)), c.R, c.G, c.B))
+	debugColor(c)
 }
 
 func tempToRGBA(temp float64) color.RGBA {
-	var upper, lower colorRange
+	lower := colorRanges[len(colorRanges)-1]
+	upper := colorRanges[0]
 	for _, cr := range colorRanges {
 		if cr.MaxTemp > temp && cr.MaxTemp < upper.MaxTemp {
 			upper = cr
@@ -153,4 +154,8 @@ func midpointRGBA(upper, lower color.RGBA, pct float64) color.RGBA {
 		G: uint8((float64(upper.G)-float64(lower.G))*pct) + lower.G,
 		B: uint8((float64(upper.B)-float64(lower.B))*pct) + lower.B,
 	}
+}
+
+func debugColor(c color.RGBA) {
+	fmt.Println("Color: ", rgbterm.BgString(strconv.Itoa(int(c.R))+","+strconv.Itoa(int(c.G))+","+strconv.Itoa(int(c.B)), c.R, c.G, c.B))
 }
