@@ -137,10 +137,10 @@ func tempToRGBA(temp float64) color.RGBA {
 	lower := colorRanges[len(colorRanges)-1]
 	upper := colorRanges[0]
 	for _, cr := range colorRanges {
-		if cr.MaxTemp > temp && cr.MaxTemp < upper.MaxTemp {
+		if cr.MaxTemp >= temp && cr.MaxTemp < upper.MaxTemp {
 			upper = cr
 		}
-		if cr.MaxTemp < temp && cr.MaxTemp > lower.MaxTemp {
+		if cr.MaxTemp <= temp && cr.MaxTemp > lower.MaxTemp {
 			lower = cr
 		}
 	}
